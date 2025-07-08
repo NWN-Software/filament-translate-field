@@ -4,7 +4,6 @@ namespace SolutionForest\FilamentTranslateField\Forms\Component;
 
 use Closure;
 use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Field;
 use Filament\Support\Concerns\CanBeContained;
 use Filament\Support\Concerns\CanPersistTab;
@@ -12,6 +11,7 @@ use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use Illuminate\Support\Collection;
 use SolutionForest\FilamentTranslateField\Facades\FilamentTranslateField;
 use SolutionForest\FilamentTranslateField\Forms\Component\Translate\Tab;
+use Filament\Schemas\Components\Component;
 
 class Translate extends Component
 {
