@@ -2,9 +2,7 @@
 
 namespace SolutionForest\FilamentTranslateField\Forms\Component\Translate;
 
-use Filament\Forms\Components\Tabs\Tab as BaseComponent;
-
-class Tab extends BaseComponent
+class Tab extends \Filament\Schemas\Components\Tabs\Tab
 {
     protected string $view = 'filament-translate-field::forms.components.translate-tab';
 

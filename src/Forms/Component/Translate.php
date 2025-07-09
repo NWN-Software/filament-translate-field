@@ -2,11 +2,11 @@
 
 namespace SolutionForest\FilamentTranslateField\Forms\Component;
 
+use Filament\Schemas\Components\Concerns\CanPersistTab;
+use Filament\Schemas\Schema;
 use Closure;
-use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Field;
 use Filament\Support\Concerns\CanBeContained;
-use Filament\Support\Concerns\CanPersistTab;
 use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use Illuminate\Support\Collection;
 use SolutionForest\FilamentTranslateField\Facades\FilamentTranslateField;
@@ -63,7 +63,7 @@ class Translate extends Component
     }
 
     /**
-     * @param  \Closure|array<string>|\Illuminate\Support\Collection<string>  $locales
+     * @param Closure|array<string>|Collection<string> $locales
      */
     public function locales(Closure | array | Collection $locales): static
     {
@@ -129,7 +129,7 @@ class Translate extends Component
     }
 
     /**
-     * @return array<string>|\Illuminate\Support\Collection<string>
+     * @return array<string>|Collection<string>
      */
     public function getLocales(): array | Collection
     {
@@ -137,7 +137,7 @@ class Translate extends Component
     }
 
     /**
-     * @return array<string>|\Illuminate\Support\Collection<string>
+     * @return array<string>|Collection<string>
      */
     public function getLocaleLabels(): array | Collection
     {
@@ -206,7 +206,7 @@ class Translate extends Component
             $queryStringTab = request()->query($this->getTabQueryStringKey());
 
             $tabs = collect($this->getChildComponentContainers())
-                ->map(fn (ComponentContainer $container) => collect($container->getComponents())->first() ?? null)
+                ->map(fn (Schema $schema) => collect($schema->getComponents())->first() ?? null)
                 ->values();
 
             foreach ($tabs as $index => $tab) {
@@ -233,16 +233,16 @@ class Translate extends Component
     }
 
     /**
-     * @return array<ComponentContainer>
+     * @return array<Schema>
      */
-    public function getChildComponentContainers(bool $withHidden = false): array
+    public function getChildSchemas(bool $withHidden = false): array
     {
         $containers = [];
 
         $locales = $this->getLocales();
 
         foreach ($locales as $locale) {
-            $containers[$locale] = ComponentContainer::make($this->getLivewire())
+            $containers[$locale] = Schema::make($this->getLivewire())
                 ->parentComponent($this)
                 ->components([
                     Tab::make($locale)
@@ -302,7 +302,7 @@ class Translate extends Component
 
         } else {
 
-            $childComponents = $localeComponent->getChildComponents();
+            $childComponents = $localeComponent->getDefaultChildComponents();
 
             if ($childComponents) {
                 $localeComponent->schema(
