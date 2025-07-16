@@ -2,16 +2,16 @@
 
 namespace SolutionForest\FilamentTranslateField\Forms\Component;
 
-use Filament\Schemas\Components\Concerns\CanPersistTab;
-use Filament\Schemas\Schema;
 use Closure;
 use Filament\Forms\Components\Field;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Concerns\CanPersistTab;
+use Filament\Schemas\Schema;
 use Filament\Support\Concerns\CanBeContained;
 use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use Illuminate\Support\Collection;
 use SolutionForest\FilamentTranslateField\Facades\FilamentTranslateField;
 use SolutionForest\FilamentTranslateField\Forms\Component\Translate\Tab;
-use Filament\Schemas\Components\Component;
 
 class Translate extends Component
 {
@@ -63,7 +63,7 @@ class Translate extends Component
     }
 
     /**
-     * @param Closure|array<string>|Collection<string> $locales
+     * @param  Closure|array<string>|Collection<string>  $locales
      */
     public function locales(Closure | array | Collection $locales): static
     {
@@ -205,7 +205,7 @@ class Translate extends Component
 
             $queryStringTab = request()->query($this->getTabQueryStringKey());
 
-            $tabs = collect($this->getChildComponentContainers())
+            $tabs = collect($this->getChildSchemas())
                 ->map(fn (Schema $schema) => collect($schema->getComponents())->first() ?? null)
                 ->values();
 
