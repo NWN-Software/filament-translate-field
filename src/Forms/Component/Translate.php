@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Field;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Concerns\CanPersistTab;
+use Filament\Schemas\Components\Concerns\HasLabel;
 use Filament\Schemas\Schema;
 use Filament\Support\Concerns\CanBeContained;
 use Filament\Support\Concerns\HasExtraAlpineAttributes;
@@ -18,6 +19,7 @@ class Translate extends Component
     use CanBeContained;
     use CanPersistTab;
     use HasExtraAlpineAttributes;
+    use HasLabel;
 
     /**
      * @var view-string
